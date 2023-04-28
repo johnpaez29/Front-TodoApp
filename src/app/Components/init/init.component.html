@@ -1,0 +1,23 @@
+<div class="container">
+    <form #userForm="ngForm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label for="UserName">UserName</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control row" id="UserName" required maxlength="20"
+                    [(ngModel)]="userInsertForm.UserName" name="UserName" #UserName="ngModel">
+                </div>
+            </div>
+            <div *ngIf="UserName.errors && isSubmit" class="alert alert-danger validationError col-sm-6">
+                userName is required
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-success" (click)="SetUserName(userForm.form.valid)">Show TodoList</button>
+            </div>
+        </div>
+    </form>
+
+    <app-to-do *ngIf="!UserName.errors && isSubmit" [userInto]='userIntoValue' [destroyChild]='destroyChild'></app-to-do>
+</div>

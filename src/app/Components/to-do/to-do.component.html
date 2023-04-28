@@ -1,0 +1,117 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div class="container">
+    <div class="right">
+        <button class="btn btn-warning btn-lg float-end" (click)="open(mymodal, 0)">Add Todo Object</button>
+    </div>
+    <table  class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+                <ng-container *ngFor="let item of items">
+                  <tr>
+                    <td>{{ item.name }}</td>
+                    <td><button class="btn btn-info" (click)="open(mymodal,item.idTodoObject)">Show</button></td>
+                    <td><button class="btn btn-danger" (click)="openModalDelete(mymodalDelete, item.idTodoObject)">Delete</button></td>
+                  </tr>
+                </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <ng-container *ngIf="isEdit then EditPage; else InserPage"></ng-container>
+      <ng-template #EditPage>
+        <h4 class="modal-title" id="modal-basic-title">Edit Todo Object</h4>
+      </ng-template>
+      <ng-template #InserPage>
+        <h4 class="modal-title" id="modal-basic-title">Add Todo Object</h4>
+      </ng-template>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body"> 
+      <form #ToDoObject="ngForm">
+        <h3>ToDo Object</h3>
+        <input type="hidden" class="form-control row" id="IdTodoObject" required maxlength="20"
+        [(ngModel)]="itemsForm.IdTodoObject" name="IdTodoObject" #idTodoObject="ngModel" placeholder="Name ToDo Object">
+        <input type="text" class="form-control row" id="NameObject" required maxlength="20"
+        [(ngModel)]="itemsForm.NameObject" name="NameObject" #NameObject="ngModel" placeholder="Name ToDo Object">
+        <h3>Todo Items</h3>
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="itemsForm.NameItem1" required maxlength="20"
+            [(ngModel)]="itemsForm.NameItem1" name="itemsForm.NameItem1" #NameItem1="ngModel" placeholder="Add Item"> 
+          </div>
+          <div class="col-md-3">
+            <input type="checkbox" class="checkbox" id="itemsForm.CheckItem1"
+          [(ngModel)]="itemsForm.CheckItem1" name="itemsForm.CheckItem1" #CheckItem1="ngModel"> 
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="itemsForm.NameItem2" required maxlength="20"
+            [(ngModel)]="itemsForm.NameItem2" name="itemsForm.NameItem2" #NameItem2="ngModel" placeholder="Add Item"> 
+          </div>
+          <div class="col-md-3">
+            <input type="checkbox" class="checkbox" id="itemsForm.CheckItem2"
+          [(ngModel)]="itemsForm.CheckItem2" name="itemsForm.CheckItem2" #CheckItem2="ngModel"> 
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="itemsForm.NameItem3" required maxlength="20"
+            [(ngModel)]="itemsForm.NameItem3" name="itemsForm.NameItem3" #NameItem1="ngModel" placeholder="Add Item"> 
+          </div>
+          <div class="col-md-3">
+            <input type="checkbox" class="checkbox" id="itemsForm.CheckItem3"
+          [(ngModel)]="itemsForm.CheckItem3" name="itemsForm.CheckItem3" #CheckItem1="ngModel"> 
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="itemsForm.NameItem4" required maxlength="20"
+            [(ngModel)]="itemsForm.NameItem4" name="itemsForm.NameItem4" #NameItem1="ngModel" placeholder="Add Item"> 
+          </div>
+          <div class="col-md-3">
+            <input type="checkbox" class="checkbox" id="itemsForm.CheckItem4"
+          [(ngModel)]="itemsForm.CheckItem4" name="itemsForm.CheckItem4" #CheckItem1="ngModel"> 
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="itemsForm.NameItem5" required maxlength="20"
+            [(ngModel)]="itemsForm.NameItem5" name="itemsForm.NameItem5" #NameItem1="ngModel" placeholder="Add Item"> 
+          </div>
+          <div class="col-md-3">
+            <input type="checkbox" class="checkbox" id="itemsForm.CheckItem5"
+          [(ngModel)]="itemsForm.CheckItem5" name="itemsForm.CheckItem5" #CheckItem1="ngModel"> 
+          </div>
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close(ToDoObject.form.valid)">Save</button>
+        </div>    
+      </form>
+    </div> 
+  </ng-template>
+
+<ng-template #mymodalDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Object</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    If you are sure about delete ToDo Object please click on button "Set"
+  </div> 
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('')">Set</button>
+  </div> 
+</ng-template>
